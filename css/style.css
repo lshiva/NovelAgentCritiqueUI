@@ -1,0 +1,95 @@
+:root {
+    --bg-main: #0f172a; /* Slate 900 */
+    --bg-panel: #1e293b; /* Slate 800 */
+    --text-primary: #f8fafc; /* Slate 50 */
+    --text-secondary: #94a3b8; /* Slate 400 */
+    --accent: #3b82f6; /* Blue 500 */
+    --accent-hover: #2563eb; /* Blue 600 */
+    --border: #334155; /* Slate 700 */
+}
+
+body, html { 
+    margin: 0; padding: 0; 
+    font-family: 'Segoe UI', system-ui, sans-serif; 
+    background-color: var(--bg-main); 
+    color: var(--text-primary); 
+    height: 100vh; 
+}
+
+.dashboard-container { 
+    display: flex; height: 100vh; overflow: hidden; 
+}
+
+/* ZONE 1 & 2: Sidebar */
+.sidebar { 
+    width: 350px; background-color: var(--bg-panel); 
+    border-right: 1px solid var(--border); 
+    display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; 
+}
+.sidebar h2 { margin-top: 0; font-size: 1.2rem; color: var(--accent); }
+.sidebar p { color: var(--text-secondary); font-size: 0.9rem; }
+#manuscript-input { 
+    flex-grow: 1; min-height: 200px; margin-bottom: 15px; 
+    background: var(--bg-main); color: var(--text-primary); 
+    border: 1px solid var(--border); border-radius: 6px; 
+    padding: 10px; resize: none; font-family: inherit; line-height: 1.5;
+}
+#convene-btn { 
+    padding: 14px; background-color: var(--accent); color: white; 
+    border: none; border-radius: 6px; font-weight: bold; cursor: pointer; 
+    transition: background 0.2s; 
+}
+#convene-btn:hover { background-color: var(--accent-hover); }
+#convene-btn:disabled { background-color: var(--border); cursor: not-allowed; }
+
+#status-monitor { 
+    margin-top: 20px; padding: 15px; background: var(--bg-main); 
+    border: 1px dashed var(--border); border-radius: 6px; 
+    font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;
+}
+
+/* Utility */
+.hidden { display: none !important; }
+
+/* MAIN PANEL */
+.main-panel { 
+    flex-grow: 1; display: flex; flex-direction: column; 
+    padding: 20px; gap: 20px; overflow-y: auto; 
+}
+
+/* ZONE 3: War Room Tabs */
+.war-room { 
+    background-color: var(--bg-panel); border: 1px solid var(--border); 
+    border-radius: 8px; display: flex; flex-direction: column; min-height: 35vh; 
+}
+.tabs { display: flex; border-bottom: 1px solid var(--border); }
+.tab-btn { 
+    flex: 1; background: transparent; color: var(--text-secondary); 
+    border: none; padding: 12px; cursor: pointer; font-weight: 600; 
+    border-bottom: 2px solid transparent; transition: color 0.2s;
+}
+.tab-btn:hover { color: var(--text-primary); background: rgba(255,255,255,0.02); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.tab-content { 
+    padding: 20px; overflow-y: auto; flex-grow: 1; 
+    font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; 
+}
+.expert-report { display: none; }
+.expert-report.active-tab { display: block; }
+
+/* ZONE 4: Editor's Desk */
+.editors-desk { display: flex; gap: 20px; flex-grow: 1; min-height: 40vh; }
+.debate-box, .master-report-box { 
+    background-color: var(--bg-panel); border: 1px solid var(--border); 
+    border-radius: 8px; padding: 20px; display: flex; flex-direction: column; 
+}
+.debate-box { flex: 1; border-left: 4px solid #f59e0b; /* Amber border */ }
+.master-report-box { flex: 2; border-left: 4px solid var(--accent); }
+.editors-desk h3 { 
+    margin-top: 0; font-size: 1.1rem; color: var(--text-secondary); 
+    border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px; 
+}
+#debate-output, #master-output { 
+    overflow-y: auto; flex-grow: 1; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; 
+}

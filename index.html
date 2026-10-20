@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel Agent Critique Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- ZONE 1 & 2: Control Deck & Live Monitor -->
+        <aside class="sidebar">
+            <h2>The Chief Editor</h2>
+            <p>Target Scene / Chapter</p>
+            <textarea id="manuscript-input" placeholder="Paste your Wayanad chase scene here..."></textarea>
+            
+            <button id="convene-btn">Convene Editorial Board</button>
+
+            <div id="status-monitor" class="hidden">
+                <p id="status-text">⏳ Initializing Board...</p>
+            </div>
+        </aside>
+
+        <!-- ZONE 3 & 4: The War Room & Synthesis -->
+        <main class="main-panel">
+            
+            <!-- ZONE 3: Expert Tabs -->
+            <section class="war-room">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="showTab('pacing')">Pacing</button>
+                    <button class="tab-btn" onclick="showTab('psychology')">Psychology</button>
+                    <button class="tab-btn" onclick="showTab('world')">World</button>
+                    <button class="tab-btn" onclick="showTab('dialogue')">Dialogue</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div id="pacing" class="expert-report active-tab">Awaiting Pacing critique...</div>
+                    <div id="psychology" class="expert-report ">Awaiting Psychology critique...</div>
+                    <div id="world" class="expert-report ">Awaiting World Builder critique...</div>
+                    <div id="dialogue" class="expert-report ">Awaiting Dialogue Coach critique...</div>
+                </div>
+            </section>
+
+            <!-- ZONE 4: Chief Editor's Desk -->
+            <section class="editors-desk">
+                <div class="debate-box">
+                    <h3>Debate Moderator's Compromise</h3>
+                    <div id="debate-output">Awaiting debate synthesis...</div>
+                </div>
+
+                <div class="master-report-box">
+                    <h3>Executive Master Report</h3>
+                    <div id="master-output">Awaiting final synthesis...</div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
