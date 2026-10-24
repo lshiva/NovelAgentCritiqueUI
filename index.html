@@ -3,61 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novel Agent Critique Dashboard</title>
+    <title>NovelAgent Platform</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        
-        <!-- ZONE 1 & 2: Control Deck & Live Monitor -->
-        <aside class="sidebar">
-            <h2>The Chief Editor</h2>
-            <p>Target Scene / Chapter</p>
-            <textarea id="manuscript-input" placeholder="Paste your Wayanad chase scene here..."></textarea>
-            
-            <button id="convene-btn">Convene Editorial Board</button>
+    <!-- Global Navigation -->
+    <header class="app-header">
+        <div class="logo">NovelAgent Platform</div>
+        <div class="mode-switcher">
+            <button id="btn-mode-critique" class="mode-btn active" onclick="switchDashboard('critique')">Critique Dashboard</button>
+            <button id="btn-mode-studio" class="mode-btn" onclick="switchDashboard('studio')">Studio Dashboard</button>
+        </div>
+    </header>
 
-            <div id="status-monitor" class="hidden">
-                <p id="status-text">⏳ Initializing Board...</p>
+    <!-- ========================================== -->
+    <!-- DASHBOARD 1: CRITIQUE MODE (Existing)      -->
+    <!-- ========================================== -->
+    <div id="dashboard-critique" class="dashboard-container active">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="panel">
+                <h3>Zone 1: Control Deck</h3>
+                <label>Chapter Input</label>
+                <textarea id="critique-input" placeholder="Paste your manuscript here..."></textarea>
+                <button id="btn-convene-board" class="primary-btn">CONVENE EDITORIAL BOARD</button>
+            </div>
+            <div class="panel">
+                <h3>Live Execution Status</h3>
+                <ul class="status-list" id="critique-status">
+                    <li><span class="status-icon pending"></span> Pacing Critic</li>
+                    <li><span class="status-icon pending"></span> Character Psychologist</li>
+                    <li><span class="status-icon pending"></span> World Builder</li>
+                    <li><span class="status-icon pending"></span> Dialogue Coach</li>
+                    <li><span class="status-icon pending"></span> Debate Moderator</li>
+                </ul>
             </div>
         </aside>
 
-        <!-- ZONE 3 & 4: The War Room & Synthesis -->
-        <main class="main-panel">
-            
-            <!-- ZONE 3: Expert Tabs -->
-            <section class="war-room">
+        <!-- Main Dashboard Area -->
+        <main class="main-content">
+            <div class="panel top-panel">
                 <div class="tabs">
-                    <button class="tab-btn active" onclick="showTab('pacing')">Pacing</button>
-                    <button class="tab-btn" onclick="showTab('psychology')">Psychology</button>
-                    <button class="tab-btn" onclick="showTab('world')">World</button>
-                    <button class="tab-btn" onclick="showTab('dialogue')">Dialogue</button>
+                    <button class="tab-btn active" onclick="openTab(event, 'tab-pacing', 'critique')">PACING CRITIC</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-psychology', 'critique')">CHARACTER PSYCHOLOGY</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-world', 'critique')">WORLD BUILDER</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-dialogue', 'critique')">DIALOGUE COACH</button>
                 </div>
-                
-                <div class="tab-content">
-                    <div id="pacing" class="expert-report active-tab">Awaiting Pacing critique...</div>
-                    <div id="psychology" class="expert-report ">Awaiting Psychology critique...</div>
-                    <div id="world" class="expert-report ">Awaiting World Builder critique...</div>
-                    <div id="dialogue" class="expert-report ">Awaiting Dialogue Coach critique...</div>
-                </div>
-            </section>
+                <div class="tab-content active" id="tab-pacing">Pacing critique will appear here...</div>
+                <div class="tab-content" id="tab-psychology">Psychology critique will appear here...</div>
+                <div class="tab-content" id="tab-world">World Builder critique will appear here...</div>
+                <div class="tab-content" id="tab-dialogue">Dialogue critique will appear here...</div>
+            </div>
 
-            <!-- ZONE 4: Chief Editor's Desk -->
-            <section class="editors-desk">
-                <div class="debate-box">
-                    <h3>Debate Moderator's Compromise</h3>
-                    <div id="debate-output">Awaiting debate synthesis...</div>
+            <div class="bottom-panels">
+                <div class="panel debate-panel">
+                    <h3>DEBATE COMPROMISE</h3>
+                    <textarea readonly id="debate-output"></textarea>
                 </div>
-
-                <div class="master-report-box">
-                    <h3>Executive Master Report</h3>
-                    <div id="master-output">Awaiting final synthesis...</div>
+                <div class="panel master-panel">
+                    <h3>FINAL MASTER REPORT</h3>
+                    <textarea readonly id="master-output"></textarea>
                 </div>
-            </section>
-
+            </div>
         </main>
     </div>
-    
+
+    <!-- ========================================== -->
+    <!-- DASHBOARD 2: STUDIO MODE (Idea-to-Draft)   -->
+    <!-- ========================================== -->
+    <div id="dashboard-studio" class="dashboard-container hidden">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="panel">
+                <h3>Zone 1: The Incubator</h3>
+                <label>Plot Premise Input</label>
+                <textarea id="studio-plot-input" placeholder="A retired thief is forced to do one last heist..."></textarea>
+                
+                <div class="execution-settings">
+                    <label class="radio-label"><input type="radio" name="exec_mode" value="manual" checked> Manual / Interactive</label>
+                    <label class="radio-label"><input type="radio" name="exec_mode" value="auto"> Complete Automation</label>
+                    <div class="loop-counter">
+                        <label>Max Loops:</label>
+                        <input type="number" id="max-loops" value="2" min="1" max="5">
+                    </div>
+                </div>
+
+                <button id="btn-generate-draft" class="primary-btn">GENERATE DRAFT V1</button>
+            </div>
+            <div class="panel">
+                <h3>Live Execution Status</h3>
+                <ul class="status-list" id="studio-status">
+                    <li><span class="status-icon pending"></span> Narrative Architect</li>
+                    <li><span class="status-icon pending"></span> Investigative Researcher</li>
+                    <li><span class="status-icon pending"></span> Character Profiler</li>
+                    <li><span class="status-icon pending"></span> Creative Narrator</li>
+                    <li><span class="status-icon pending"></span> Editorial Board (Critique)</li>
+                    <li><span class="status-icon pending"></span> Creative Narrator (V2)</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Area -->
+        <main class="main-content">
+            <div class="panel top-panel">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'tab-draft1', 'studio')">ACTIVE MANUSCRIPT</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-outline', 'studio')">OUTLINE</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-research', 'studio')">RESEARCH NOTES</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-profiles', 'studio')">PROFILES</button>
+                </div>
+                <div class="tab-content active" id="tab-draft1">
+                    <textarea id="active-manuscript-box" placeholder="Generated draft will appear here. You can edit this text before submitting to the critique board..."></textarea>
+                    <div class="action-bar">
+                        <button id="btn-submit-critique" class="secondary-btn">Submit to Critique Board</button>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab-outline"><textarea readonly id="outline-box"></textarea></div>
+                <div class="tab-content" id="tab-research"><textarea readonly id="research-box"></textarea></div>
+                <div class="tab-content" id="tab-profiles"><textarea readonly id="profiles-box"></textarea></div>
+            </div>
+
+            <div class="bottom-panels">
+                <div class="panel critique-panel">
+                    <h3>EDITORIAL BOARD REPORT</h3>
+                    <textarea readonly id="studio-master-report" placeholder="The synthesis of the expert critics will appear here..."></textarea>
+                </div>
+                <div class="panel override-panel">
+                    <h3>DIRECTOR's OVERRIDE</h3>
+                    <textarea id="director-override" placeholder="Inject manual instructions for the rewrite here... (e.g., 'Make the vault sequence more tense')"></textarea>
+                    <button id="btn-authorize-rewrite" class="danger-btn">Authorize Rewrite (Draft V2)</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
     <script src="js/app.js"></script>
 </body>
 </html>
